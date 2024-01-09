@@ -1,0 +1,14 @@
+---
+- name: Ensuring Apache HTTP Server is deployed
+  hosts: web_servers
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Ensure Apache HTTP Server is installed and started
+      ansible.builtin.include_role:
+        name: apache
+
+    - name: Ensure the firewall ports are opened
+      ansible.builtin.include_role:
+        name: firewall

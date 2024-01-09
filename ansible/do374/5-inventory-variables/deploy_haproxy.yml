@@ -1,0 +1,14 @@
+---
+- name: Ensuring HAProxy is deployed
+  hosts: lb_servers
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Ensure HAProxy is installed and configured
+      ansible.builtin.include_role:
+        name: haproxy
+
+    - name: Ensure the firewall ports are opened
+      ansible.builtin.include_role:
+        name: firewall

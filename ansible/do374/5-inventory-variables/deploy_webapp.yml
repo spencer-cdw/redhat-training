@@ -1,0 +1,12 @@
+---
+- name: Ensuring web content is deployed
+  hosts: web_servers
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Ensure web content is deployed
+      ansible.builtin.include_role:
+        name: webapp
+      vars:
+        webapp_version: v1.0
