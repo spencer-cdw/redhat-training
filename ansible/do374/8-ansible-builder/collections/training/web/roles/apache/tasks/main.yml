@@ -1,0 +1,16 @@
+---
+- name: Ensure the packages are installed
+  ansible.builtin.yum:
+    name:
+      - httpd
+      - php
+      - git
+      - php-mysqlnd
+    state: present
+
+- name: Ensure the httpd service is started
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: true
+...

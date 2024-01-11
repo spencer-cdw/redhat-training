@@ -1,2 +1,5 @@
+# This is where you put ansible runtime dependencies (such as ansible version)
+# Also see galaxy.yml,bindep.txt and requirements.txt
+
 ---
 requires_ansible: '>=2.9.10'

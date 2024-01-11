@@ -1,0 +1,4 @@
+---
+collections:
+  - name: training.web
+    version: 1.0.1

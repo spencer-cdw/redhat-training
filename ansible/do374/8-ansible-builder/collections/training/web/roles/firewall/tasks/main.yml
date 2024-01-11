@@ -1,0 +1,22 @@
+---
+- name: Ensure the firewalld package is installed
+  ansible.builtin.yum:
+    name: firewalld
+    state: present
+
+- name: Ensure the firewalld service is started
+  ansible.builtin.service:
+    name: firewalld
+    state: started
+    enabled: true
+
+- name: Ensure the firewall is configured
+  ansible.posix.firewalld:
+    source: "{{ item['source'] | default(omit) }}"
+    zone: "{{ item['zone'] | default(omit) }}"
+    service: "{{ item['service'] | default(omit) }}"
+    port: "{{ item['port'] | default(omit) }}"
+    state: "{{ item['state'] | default('enabled') }}"
+    immediate: true
+    permanent: true
+  loop: "{{ firewall_rules }}"
