@@ -18,15 +18,16 @@ ps axo pid,comm,nice,cls --sort=-nice
 
 ## Custom nice
 
+```bash
 nice -n 15 sleep 60 &
 ps -o pid,comm,nice -C sleep
-
+```
 
 ## Change nice
 
-renice -n 19 1234
+`renice -n 19 1234`
 
-or renice from top
+or renice from `top`
 
 `top -p $(pgrep sleep)`
 Then press `r` to renice. 

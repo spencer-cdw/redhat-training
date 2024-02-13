@@ -1,37 +1,41 @@
 # tuned
 
 cat /etc/tuned/tuned-main.conf
-
+```bash
 dnf install tuned
 systemctl enable --now tuned
 Created symlink /etc/systemd/system/multi-user.target.wants/tuned.service → /usr/lib/systemd/system/tuned.service.
-
+```
 
 
 ### Get current state
 
+```bash
 systemctl is-enabled tuned
 systemctl is-active tuned
 
 tuned-adm active
 tuned-adm profile_info
+```
 
 ### Get all profiles
 
-tuned-adm list
+`tuned-adm list`
 
 ### Change profile
 
-tuned-adm profile throughput-performance
+`tuned-adm profile throughput-performance`
 
 ### Auto enable
 
-tuned-adm recommend
+`tuned-adm recommend`
 
 ## Revert
 
+```bash
 tuned-adm off
 tuned-adm active
+```
 
 ## Web Console
 
@@ -46,7 +50,7 @@ http://localhost:9090
 
 Confgi files are located in /usr/lib/tuned
 
-cat /usr/lib/tuned/<PROFILE>/tuned.conf
+`cat /usr/lib/tuned/<PROFILE>/tuned.conf`
 
 Config files can include other config files
 
@@ -58,5 +62,7 @@ include=throughput-performance
 
 You can verify individual values with syctl
 
+```bash
 sysctl vm.dirty_ratio
 sysctl vm.swappiness
+```

@@ -10,13 +10,11 @@ Use RPC to view NFSv3 server (doesn't work for v4)
 `showmount --exports server`
 
 
-
 ## Example
 
 ```bash
 serverb.lab.example.com:/shares/public  /public  nfs  rw,sync  0 0
 ```
-
 
 # autofs
 
