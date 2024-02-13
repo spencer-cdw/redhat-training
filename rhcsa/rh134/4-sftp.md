@@ -30,4 +30,6 @@ Use `sftp` or `rsync` instead.
 
 [How to exploit](https://github.com/cpandya2909/CVE-2020-15778):
 
-`scp  /sourcefile remoteserver:'`touch /tmp/exploit.sh`/targetfile'`
+```bash
+scp  /sourcefile remoteserver:'`touch /tmp/exploit.sh`/targetfile'
+```
