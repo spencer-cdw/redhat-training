@@ -1,0 +1,46 @@
+---
+- name: Install database server
+  hosts: db
+  become: true
+
+  tasks:
+
+    - name: Install mariadb
+      ansible.builtin.yum:
+        name: "{{ item }}"
+        state: latest
+      loop:
+        - "{{ db_service }}"
+        - mariadb-server
+
+    - name: Enable and start the mariadb service
+      ansible.builtin.service:
+        name: "{{ db_service }}"
+        state: started
+        enabled: true
+
+    - name: Open port 3306 in the firewall
+      ansible.posix.firewalld:
+        port: "{{ db_port }}"
+        state: enabled
+        permanent: true
+        immediate: true
+
+    - name: Copy database file to db host
+      ansible.builtin.copy:
+        src: database/webDB.sql
+        dest: /tmp
+
+    - name: Import the webDB database
+      community.mysql.mysql_db:
+        name: webDB
+        state: import
+        target: /tmp/webDB.sql
+
+    - name: Create the student mysql user
+      community.mysql.mysql_user:
+        state: present
+        name: student
+        password: student
+        priv: 'webDB.*:ALL,GRANT'
+        host: '%'

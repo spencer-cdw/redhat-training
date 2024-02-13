@@ -1,0 +1,2 @@
+db_service: mariadb
+db_port: 3306/tcp #TODO: is this syntax correct

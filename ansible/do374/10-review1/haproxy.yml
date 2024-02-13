@@ -1,0 +1,37 @@
+---
+- name: Deploy haproxy
+  hosts: haproxy
+  become: true
+
+  # vars:
+  #   - lb_service: haproxy
+  #   - firewall_services:
+  #       - http
+  #       - https
+
+  tasks:
+
+    - name: Install haproxy
+      ansible.builtin.yum:
+        name: "{{ lb_service }}"
+        state: latest
+
+    - name: Deploy haproxy config file
+      ansible.builtin.template:
+        src: templates/haproxy.cfg.j2
+        dest: /etc/haproxy/haproxy.cfg
+
+    - name: Allow port 80 and 443 through the firewall
+      ansible.posix.firewalld:
+        service: "{{ item }}"
+        state: enabled
+        permanent: true
+        immediate: true
+      with_items:
+        - "{{ firewall_services }}"
+
+    - name: Start haproxy service
+      ansible.builtin.service:
+        name: "{{ lb_service }}"
+        state: started
+        enabled: true

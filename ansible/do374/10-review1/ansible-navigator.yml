@@ -1,0 +1,12 @@
+---
+ansible-navigator:
+  playbook-artifact:
+    enable: False
+  
+  execution-environment:
+    container-engine: podman
+    enabled: True
+    image: ee-supported-rhel8:latest
+    pull:
+      policy: missing
+  mode: stdout

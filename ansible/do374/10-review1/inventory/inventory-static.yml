@@ -1,0 +1,12 @@
+web:
+  hosts:
+    serverb.lab.example.com:
+    serverc.lab.example.com:
+
+db:
+  hosts:
+    serverd.lab.example.com
+
+
+haproxy:
+  hosts:

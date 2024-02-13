@@ -1,0 +1,4 @@
+web_service: httpd
+firewall_services:
+  - http
+  - https
