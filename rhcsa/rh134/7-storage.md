@@ -6,14 +6,14 @@ https://rol.redhat.com/rol/app/courses/rh134-9.0/pages/ch07
 
 ## MBR
 
-Supports 4 primary partitions
-Supports 15 partitions total (on linux)
-Supports 2TB drives
+- Supports 4 primary partitions
+- Supports 15 partitions total (on linux)
+- Supports 2TB drives
 
 ## GPT
 
-Supports 128 partitions
-Supports 8ZiB drives
+- Supports 128 partitions
+- Supports 8ZiB drives
 
 
 ## Partitioning
