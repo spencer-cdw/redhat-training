@@ -11,20 +11,20 @@ _UID is the UID of the user that runs the process.
 _SYSTEMD_UNIT is the systemd unit that started the process.
 ```
 
-journalctl _PID=1
+    journalctl _PID=1
 
-journalctl --since 06:49:00 --until 07:19:00
+    journalctl --since 06:49:00 --until 07:19:00
 
 
 # Rsyslog
 
-save configs to /etc/rsyslog.d/*.conf
+    save configs to /etc/rsyslog.d/*.conf
 
 Format
 
-*.debug /var/log/messages-debug
+    *.debug /var/log/messages-debug
 
-systemctl restart rsyslog
+    systemctl restart rsyslog
 
 
 
@@ -49,11 +49,11 @@ logger -p authpriv.alert "This is a test"
 sudo tail /var/log/auth-errors
 ```
 
-0	emerg	System is unusable
-1	alert	Action must be taken immediately
-2	crit	Critical condition
-3	err	Non-critical error condition
-4	warning	Warning condition
-5	notice	Normal but significant event
-6	info	Informational event
-7	debug	Debugging-level message
+    0	emerg	System is unusable
+    1	alert	Action must be taken immediately
+    2	crit	Critical condition
+    3	err	Non-critical error condition
+    4	warning	Warning condition
+    5	notice	Normal but significant event
+    6	info	Informational event
+    7	debug	Debugging-level message
