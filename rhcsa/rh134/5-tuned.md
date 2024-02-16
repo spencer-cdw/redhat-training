@@ -48,7 +48,7 @@ http://localhost:9090
 
 ## Config files
 
-Confgi files are located in /usr/lib/tuned
+Config files are located in /usr/lib/tuned
 
 `cat /usr/lib/tuned/<PROFILE>/tuned.conf`
 
