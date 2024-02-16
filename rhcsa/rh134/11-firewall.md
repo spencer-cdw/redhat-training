@@ -15,7 +15,7 @@ Useful tools
 
 ## FirewallD
 
-firewallD uses a concept of `zone`. Packets are zassigned a zone based on source ip, interface, and other criteria.
+firewallD uses a concept of `zone`. Packets are assigned a zone based on source ip, interface, and other criteria.
 
 ## Predefined Zones
 
