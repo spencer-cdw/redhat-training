@@ -16,6 +16,6 @@ View customizations
 `semanage port --list -C`
 
 
-dnf install selinux-policy-doc
-mak -k _selinux
+    dnf install selinux-policy-doc
+    mak -k _selinux
 
