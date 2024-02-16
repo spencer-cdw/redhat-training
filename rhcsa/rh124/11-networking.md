@@ -45,7 +45,7 @@ Always enclose IPv6 addresses in square brackets when used in URLs or other appl
 
 Common ports are stored in `/etc/services`
 
-grep ' 53/udp' /etc/services
+    grep ' 53/udp' /etc/services
 
 ## Tools
 
