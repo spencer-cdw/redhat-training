@@ -43,8 +43,8 @@ To configure grub, use `grub2-mkconfig` to genreate the configs.
 - rescue.target
 - emergency.target
 
-systemctl list-dependencies graphical.target | grep target
-systemctl list-units --type=target --all
+  systemctl list-dependencies graphical.target | grep target
+  systemctl list-units --type=target --all
 
 
 ### Set default target
