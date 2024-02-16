@@ -3,8 +3,8 @@
 
 ### Range
 
--20 (increased priority)
-+19 (decreased priority)
+-20 (increased priority)  
++19 (decreased priority)  
 
 Users can decrease their own priority, but only root can increase it.
 
@@ -13,8 +13,9 @@ Nice values map to a priority value, and both values are available for viewing i
 ![](https://rol.redhat.com/rol/static/static_file_cache/rh134-9.0/tuning/priority-and-nice-values.svg)  
 
 
-
+```bash
 ps axo pid,comm,nice,cls --sort=-nice
+```
 
 ## Custom nice
 

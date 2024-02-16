@@ -1,6 +1,6 @@
 # Rsync
 
-
+```bash
 --recursive
 --links
 --perms
@@ -8,6 +8,7 @@
 --group
 --owner
 --devices
+```
 
 Specifying a trailing slash is important. Without it, the source directory will be copied into the destination directory. With it, the contents of the source directory will be copied into the destination directory.
 

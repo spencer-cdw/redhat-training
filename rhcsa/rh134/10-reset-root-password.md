@@ -40,4 +40,3 @@ Both of these mount the root volume as read only, `mount -o remount,rw /` to mak
 ## Cloud recovery
 
 Cloud based systems don't have a rescue kernel
-

@@ -42,7 +42,6 @@ mkfs -t xfs /dev/vg01/lv01
 mkdir /mnt/data
 ```
 
-
 # VDO
 
 VDO stands for Virtual Data Optimizer which does deduplciation, compression and thin provisioning. 
@@ -85,7 +84,6 @@ resize2fs /dev/vg01/lv01
 vgreduce vg01 /dev/vdb3
 ```
 
-
 ### Remove LVM
 
 ```bash
@@ -93,7 +91,6 @@ lvremove /dev/vg01/lv01
 vgremove vg01
 pvremove /dev/vdb1 /dev/vdb2
 ```
-
 
 # Notes
 

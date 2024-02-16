@@ -64,4 +64,3 @@ Change target with kernel command line in boot loader
 `systemd.unit=rescue.target`
 
 ![](./img/grub1.png)
-

@@ -15,7 +15,7 @@ View customizations
 
 `semanage port --list -C`
 
-
-    dnf install selinux-policy-doc
-    man -k _selinux
-
+```bash
+dnf install selinux-policy-doc
+man -k _selinux
+```

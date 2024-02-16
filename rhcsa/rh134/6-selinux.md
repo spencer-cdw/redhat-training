@@ -25,28 +25,27 @@ sealert
 
 ## States
 
-- Enforcing
-- Permissive
-- Disabled
-
+- Enforcing  
+- Permissive  
+- Disabled  
 
 RHEL 9 forces `selinux=0` be set in the kernel parameter. 
 Previous version could modify `/etc/selinux/config` file to disable selinux.
 
 ## Disable selinux
 
+```bash
 getenforce
 setenforce 0
 getenforce
 cat /etc/selinux/config #might need to change this
-
+```
 
 ## Contexts
 
 `seamanage fcontext --list`
 
 Common context is the 'pirate' `(/.*)?`
-
 
 
 stored in `/etc/selinux/targeted/contexts/files`
@@ -88,7 +87,6 @@ semanage fcontext -l -C
 ```
 
 
-
 # Booleans
 
 booleans let you make your own application specific behavior
@@ -104,9 +102,7 @@ getsebool -a | grep home
 setsebool -P httpd_enable_homedirs on
 ```
 
-
 -P makes the change 'persistent' across reboots (permentant)
-
 
 
 # Troubleshooting

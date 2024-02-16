@@ -20,8 +20,10 @@ Local working directory: /home/user
 
 To upload/download a file from inside the sftp shell, use the `put` and `get` commands:
 
-    put -r directory
-    get /etc/yum.conf
+```bash
+put -r directory
+get /etc/yum.conf
+```
 
 # scp
 

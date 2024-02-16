@@ -34,9 +34,11 @@ tar -c -v -f
 ACLs and SELinux are not preserved by default. Use the `--acls` and `--selinux` flags to preserve them.
 
 
-    --xattrs
-    --selinux
-    --acls
+```bash
+--xattrs
+--selinux
+--acls
+```
 
 ### List contents
 ```bash

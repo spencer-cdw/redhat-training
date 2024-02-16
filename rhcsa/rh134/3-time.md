@@ -42,6 +42,8 @@ server classroom.example.com iburst
 
 NTP quality is defined by stratum
 
+```bash
 stratum 0 = reference clock
 stratum 1 = ntp server directely attached to reference clock
 stratum 2 = machine that syncronizes time from NTP server
+```

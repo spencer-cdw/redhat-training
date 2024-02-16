@@ -34,9 +34,9 @@ GPT parititons don't need the 'primary' 'extended' flag defined
 
 ## FileSystems
 
-mkfs.xfs /dev/vdb1
+`mkfs.xfs /dev/vdb1`
 
-mkfs.ext4 /dev/vdb1
+`mkfs.ext4 /dev/vdb1`
 
 
 ## Mounting
@@ -52,12 +52,14 @@ mkfs.ext4 /dev/vdb1
 
 | Device | Mount Point | File System | Options | Dump | Pass |
 
+```bash
 Device = UUID or /dev/vdb1
 Mount Point = /mnt/foobar
 File System = xfs
 Options = comma separated options
 Dump = 0 or 1, weather to back up the device (not really used)
 Pass = 0 or 1, weather to check the device at boot with fsck (not used on XFS) (ext4 should be 1 for root, and 2 for others)
+```
 
 `UUID=a8063676-44dd-409a-b584-68be2c9f5570   /        xfs   defaults   0 0`
 
@@ -70,7 +72,6 @@ or
 `mount /foobar`
 
 Be sure to use `systemctl daemon-reload` after modifying `/etc/fstab`
-
 
 ---
 
