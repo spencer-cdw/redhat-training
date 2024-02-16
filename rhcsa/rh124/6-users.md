@@ -54,7 +54,7 @@ Unlock account
 
 `usermod -U bob`
 
-    cahage -m 0 -M 90 -W 7 -I 14 sysadmin05
+    chage -m 0 -M 90 -W 7 -I 14 sysadmin05
 
     -m = min days (time until they can change password again, usually 0)
     -M = max days (time until password needs a reset)
