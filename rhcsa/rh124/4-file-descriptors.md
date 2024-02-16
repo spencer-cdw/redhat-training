@@ -13,9 +13,9 @@
 ```
 
 
-## Pipline
+## Pipeline
 
-when combining redirection and pipelineing, the shell setsup the entire pipeline first, then redirects output. 
+When combining redirection and pipelineing, the shell sets up the entire pipeline first, then redirects output. 
 
 for example the following will not work because 'less' does not receive the output
 
