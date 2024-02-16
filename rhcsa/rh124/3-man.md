@@ -12,24 +12,23 @@ apropos mkdir #same thing as man -k mkdir
 Search open man pages that mention passwd
 (press q to exit each page, or man to view the next)
 
-man -K passwd
+    man -K passwd
 
 
 ## Shortcuts
 
-f (space) - forward one window
-b - backward one window
-d - down half window
-u - up half window
+    f (space) - forward one window
+    b - backward one window
+    d - down half window
+    u - up half window
+    
+    g - go to top of page
+    G - go to bottom of page
 
-g - go to top of page
-G - go to bottom of page
-
-
-h - help
-/ - search forward
+    h - help
+    / - search forward
 
 ### Searching
 
-man mkdir | grep -- '-m'
-man mkdir | grep -e '-m' #same thing as above
+    man mkdir | grep -- '-m'
+    man mkdir | grep -e '-m' #same thing as above
