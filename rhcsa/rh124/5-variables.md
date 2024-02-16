@@ -14,7 +14,7 @@ These profiles also import
 
 ## Non-interactive shells
 
-/etc/bashrc
-~/.bashrc
+    /etc/bashrc
+    ~/.bashrc
 
 Non interactive also sources any files in the BASH_ENV variable
