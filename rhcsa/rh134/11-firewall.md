@@ -54,16 +54,16 @@ You can also manage services through cockpit
 
 All changes default to `runtime` config, you must use `--permanent` to make changes permanent
 
-firewall-cmd --list-all
-
-firewall-cmd --get-default-zone
-firewall-cmd --set-default-zone
-firewall-cmd --get-zones
-firewall-cmd --get-active-zones
-
-firewall-cmd --permanent --zone=internal --add-source=192.168.0.0/24
-firewall-cmd --permanent --zone=internal --add-service=mysql
-firewall-cmd --reload
-
-firewall-cmd --permanent --zone=public --add-source=172.25.25.11/32
-firewall-cmd --reload
+    firewall-cmd --list-all
+    
+    firewall-cmd --get-default-zone
+    firewall-cmd --set-default-zone
+    firewall-cmd --get-zones
+    firewall-cmd --get-active-zones
+    
+    firewall-cmd --permanent --zone=internal --add-source=192.168.0.0/24
+    firewall-cmd --permanent --zone=internal --add-service=mysql
+    firewall-cmd --reload
+    
+    firewall-cmd --permanent --zone=public --add-source=172.25.25.11/32
+    firewall-cmd --reload
