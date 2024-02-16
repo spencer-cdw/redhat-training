@@ -15,6 +15,7 @@ Common tar commands
     tar --list --file foo.tar
 
 Algorithms
+
     -a ( --auto-compress) : auto compress determins the algorithm to use based on file extension
     -z ( --gzip ) : gzip
     -j ( --bzip2 ) : bzip2
