@@ -1,7 +1,7 @@
-eno1 = onboard device 1
-ens1 = hotplug device 1
-wlp4s0 = wireless card on PCI 4 in slot 0
-enp0s1f0 = function 0 of ethernet card on bus 0 in slot 1. 
+    eno1 = onboard device 1
+    ens1 = hotplug device 1
+    wlp4s0 = wireless card on PCI 4 in slot 0
+    enp0s1f0 = function 0 of ethernet card on bus 0 in slot 1. 
 
 
 ## IPv6
