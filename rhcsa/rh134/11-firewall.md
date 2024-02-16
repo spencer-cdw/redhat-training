@@ -5,6 +5,7 @@ https://rol.redhat.com/rol/app/courses/rh134-9.0/pages/ch11
 `nftables`is based on `netfiter` framework (opposed to deprecated `iptables` framework)
 
 iptables had multiple tools (`iptables`, `ip6tables`, `ebtables`, `arptables`)
+
 `nft` tool handles everything for `nftables`
 
 Useful tools
