@@ -14,5 +14,5 @@ rw-r--r--. 2 student student 11 Mar  3 06:51 files/target.file
 ```
 
 
-When you `cd` to a symbolic link, the `pwc` shows the symlink, not the real one. 
+When you `cd` to a symbolic link, the `pwd` shows the symlink, not the real one. 
 Use `cd -P` to show the real path
