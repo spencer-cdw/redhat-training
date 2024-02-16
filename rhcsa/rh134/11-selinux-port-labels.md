@@ -17,5 +17,5 @@ View customizations
 
 
     dnf install selinux-policy-doc
-    mak -k _selinux
+    man -k _selinux
 
