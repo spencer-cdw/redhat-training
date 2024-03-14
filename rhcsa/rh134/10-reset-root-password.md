@@ -40,3 +40,22 @@ Both of these mount the root volume as read only, `mount -o remount,rw /` to mak
 ## Cloud recovery
 
 Cloud based systems don't have a rescue kernel
+
+
+## 9.0 bug
+
+9.0 has a bug where it still prompts for password when using `rd.break` 
+9.1 has it fixed, but the documentation is still confusing. 
+
+Regardless, the `rd.break` method isn't the best. [This video](https://www.youtube.com/watch?v=HK7OI3uboKg) outlines a better approach. 
+
+1. Press f8 to interupt boot process
+2. append `init=/bin/bash` to `linux` line in grub menu
+3. remount read/write `mount -o remount,rw /`
+4. Note selinux status `/sbin/getenforce` (note $PATH won't be configured properly yet)
+5. Get selinux labels of `/etc/shadow` with `ls -lZ /etc/shadow`
+6. Change password `passwd`
+7. Reset selinux context `chcon system_u:object_r:shadow_t:s0 /etc/shadow`
+8. Enable autorelabel (optional, not needed if you ran chcon). `touch /.autorelabel`
+9. Reboot, or start systemd `exec /bin/init`
+10. Reboot again if autrelabel had to make changes (shouldn't be required if you ran `chcon`)

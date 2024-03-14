@@ -16,6 +16,19 @@ https://rol.redhat.com/rol/app/courses/rh134-9.0/pages/ch07
 - Supports 8ZiB drives
 
 
+
+### Start Sector
+
+Best practice is to start the first partition at 2048s (1MB) to align with the 4k sector size of modern drives.
+
+`parted /dev/vda mkpart primary xfs 2048s 1000MB`
+
+## Tools
+
+There is `parted` and `fdisk`
+
+However a more user friendly tool is `cfdisk`
+
 ## Partitioning
 
 `parted /dev/vda print`
@@ -34,9 +47,10 @@ GPT parititons don't need the 'primary' 'extended' flag defined
 
 ## FileSystems
 
-`mkfs.xfs /dev/vdb1`
+Besure to assign a label to the partition table when creating it. The redhat test will fail if you don't.
+cfdisk does not have the ability to name partitions, but `parted` does. 
 
-`mkfs.ext4 /dev/vdb1`
+`parted name 1 backup`
 
 
 ## Mounting
@@ -82,3 +96,16 @@ parted /dev/vdb mkpart backup xfs 2048s 2GB
 parted /dev/vdb print
 udevadm settle
 ```
+
+
+### Labeling
+
+You can label from parted or if using cfdisk (which you should be), you can label after the fact with `e2label` or `xfs_admin`
+
+**Note MBR fat partitions (like those on a flash drive) prefer uppercase**
+
+`e2label /dev/vdb1 backup`
+`e2label /dev/vdb2 UNTITLED`
+
+
+`xfs_admin -L backup /dev/vdb1`

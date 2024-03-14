@@ -14,6 +14,15 @@ Logical Volume (LVs)
 
 Create parition
 
+You can use `parted`, or the more user friendly way is to use `cfdisk`. 
+
+**Note that the redhat grading software uses disk partition table names so you still will need to use `parted` to set the name**
+
+```bash
+cfdisk
+parted name 1 foo
+parted name 2 bar
+
 ```bash
 parted /dev/vdb mklabel gpt mkpart primary 1MiB 769MiB
 parted /dev/vdb mkpart primary 769MiB 1026MiB

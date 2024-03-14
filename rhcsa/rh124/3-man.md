@@ -15,6 +15,27 @@ Search open man pages that mention passwd
     man -K passwd
 
 
+## Reindex
+
+If man pages aren't returning anything
+
+```bash
+man -k vim
+vim: nothing appropriate
+```
+
+Most likely you need to either install man pages, or reindex
+
+```bash
+dnf install man-pages
+```
+
+Or reindex
+
+```bash
+mandb
+``` 
+
 ## Shortcuts
 
     f (space) - forward one window

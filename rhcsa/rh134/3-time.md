@@ -12,6 +12,8 @@ timedatectl set-timezone America/Denver
 
 tzselect (interactive timezone selecter)
 
+Note that you will still need to run `timedatectl set-timezone foo/bar`. 
+
 # Chronyd
 
 

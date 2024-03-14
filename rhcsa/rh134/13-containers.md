@@ -33,6 +33,11 @@ Multilpe ways to login
 `echo $PASSWORDVAR | podman login --username foo --password-stdin registry.access.redhat.com`
 
 
+### Podman
+
+podman does not use a daemon, so it does not need root privilages to run.
+
+
 ### Config
 
 The config for container registires is stored in 
@@ -46,7 +51,7 @@ Its recomended to make your own config for non privileged username
 
 ### Names
 
-You can use shor tnames or fully qualified names
+You can use short names or fully qualified names
 
 `podman pull ubi`
 `podman pull registry.access.redhat.com/ubi8/ubi:latest`
