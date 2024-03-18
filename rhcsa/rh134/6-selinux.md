@@ -102,7 +102,7 @@ getsebool -a | grep home
 setsebool -P httpd_enable_homedirs on
 ```
 
--P makes the change 'persistent' across reboots (permentant)
+`-P` makes the change 'persistent' across reboots (permentant)
 
 
 # Troubleshooting
