@@ -36,7 +36,6 @@ When mounting with SELinux, make sure to use the `Z` option to relabel the bind 
 podman run -d foobar -v /home/user/db_data:/var/lib/mysql:Z foobar:latest
 ```
 
-
 ## Ports
 
 to view portmappings use `podman port -a`
@@ -64,7 +63,7 @@ podman 4.0 supports both
 - netavark
 - cni
 
-To change between them modify /usr/share/containers/containers.conf
+To change between them modify `/usr/share/containers/containers.conf`
 
 
 Podman doesn't enable dns on the default network. 
@@ -74,9 +73,7 @@ To enable
 podman network create --gateway 10.87.0.1 --subnet 10.87.0.0/16 foobar_net
 ```
 
-
 `podman network inspect foobar_net`
-
 
 ## Multiple Networks
 
@@ -93,4 +90,3 @@ podman network inspect backend
 podman network connect backend foo
 podman network connect backend bar
 ```
-

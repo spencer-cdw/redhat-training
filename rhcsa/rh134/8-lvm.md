@@ -12,14 +12,14 @@ Logical Volume (LVs)
 `lvdisplay`
 
 
-Create parition
+### Create parition
 
 You can use `parted`, or the more user friendly way is to use `cfdisk`. 
 
 **Note that the redhat grading software uses disk partition table names so you still will need to use `parted` to set the name**
 
 ```bash
-cfdisk
+cfdisk /dev/vdb
 parted name 1 foo
 parted name 2 bar
 
@@ -31,20 +31,19 @@ parted /dev/vdb set 2 lvm on
 udevadm settle
 ```
 
-Create PV
+### Create PV
 
 `pvcreate /dev/vdb1 /dev/vdb2`
 
-Create Volume Group
+### Create Volume Group
 
 `vgcreate vg01 /dev/vdb1 /dev/vdb2`
 
-Create Logical Volume
+### Create Logical Volume
 
 `lvcreate -n lv01 --size 300M vg01`
 
-
-Create Filesystem
+### Create Filesystem
 
 ```bash
 mkfs -t xfs /dev/vg01/lv01
@@ -69,19 +68,31 @@ vgextend vg01 /dev/vdb3
 Extend Logical Volume
 
 ```bash
-lvextend -L +100M /dev/vg01/lv01
+lvextend --size +100M /dev/vg01/lv01
 xfs_growfs /mnt/data
 ```
 
-Or you can run lvextend and xfs_growfs at the same time with `-r`
+Or you can run `lvextend` and `xfs_growfs` at the same time with `-r`
 
 ```bash
-lvextend -L +100M -r /dev/vg01/lv01
+lvextend --size +100M --resizefs /dev/vg01/lv01
+```
+
+You may be asked to increase by extents
+
+```bash
+lvextend --extents +42 --resizefs /dev/vg01/lv01
+```
+
+Or
+
+```bash
+lvextend --extents 100% --resizef2 /dev/vg01/lv01
 ```
 
 #### resize2fs
 
-resize2fs can be used instead of xfs_growfs. `resize2fs` supports both online and offline volumes. 
+resize2fs can be used instead of `xfs_growfs`. `resize2fs` supports both online and offline volumes. 
 
 ```bash
 resize2fs /dev/vg01/lv01

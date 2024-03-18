@@ -4,6 +4,10 @@ ifcfg is deprecated
 /etc/sysconfig/network-scripts is deprecated
 
 
+For the test, use `nmtui` since it is faster and easier than `nmcli`. 
+`dnf install NetworkManager-tui`
+`nmtui`
+
 ## Config files
 /etc/NetworkManager/system-connections
 

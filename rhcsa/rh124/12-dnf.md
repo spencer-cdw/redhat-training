@@ -56,3 +56,16 @@ You can either edit /etc/yum.repos.d or do dnf config-manager --add-repo
     dnf config-manager \
     --add-repo="https://dl.fedoraproject.org/pub/epel/9/Everything/x86_64/"
 
+In the exam, you will probably need to disable gpgcheck. Disabling gpgcheck can not be done in one command, it will take multiple executions
+
+```
+dnf config-manager \
+--add-repo="https://dl.fedoraproject.org/pub/epel/9/Everything/x86_64/"
+dnf config-manager --setopt=https://dl.fedoraproject.org/pub/epel/9/Everything/x86_64/.gpgcheck=0 --save
+```
+
+Or an easier approach is to just manually add the following line to the repo config file
+
+```bash
+gpgcheck=0
+```

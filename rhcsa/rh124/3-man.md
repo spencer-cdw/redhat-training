@@ -53,3 +53,9 @@ mandb
 
     man mkdir | grep -- '-m'
     man mkdir | grep -e '-m' #same thing as above
+
+
+# man -k / man -K
+
+`man -k` searches just headings
+`man -K` searches all text (takes longer)

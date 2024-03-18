@@ -1,8 +1,8 @@
 # SELinux Port Labels
 
-sudo cat /etc/services
+`sudo cat /etc/services`
 
-sudo semanage port --list
+`sudo semanage port --list`
 
 ### Create new port
 

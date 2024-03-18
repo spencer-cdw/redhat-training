@@ -34,6 +34,17 @@ To specify a different queue.
 
 # Cron
 
+The man pages for cron do not have clear examples of how to format. 
+The best man page is the posix page `1p` `man 1p crontab`
+
+The best explination is stored in a fele `/etc/crontab`
+
+```bash
+cat /etc/crontab
+
+
+
+
     crontab -l # list all jobs
     crontab -r # remove all jobs for user
     contab -e # edit jobs for current user
