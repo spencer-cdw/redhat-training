@@ -42,9 +42,6 @@ The best explination is stored in a fele `/etc/crontab`
 ```bash
 cat /etc/crontab
 
-
-
-
     crontab -l # list all jobs
     crontab -r # remove all jobs for user
     contab -e # edit jobs for current user

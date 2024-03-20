@@ -68,14 +68,14 @@ ss -pl -A inet # list processes using sockets, ignore domain sockets. This is th
 ```
 ## Devices
 
-    ip -br addr # show devices
+```bash
+ip -br addr # show devices
 
-    ip -br a # shorthand version of addr
+ip -br a # shorthand version of addr
 
-    ip link # show mac addresses
+ip link # show mac addresses
 
-    ip -s link show en0 # show statistics for en0, such as dropped packets
+ip -s link show en0 # show statistics for en0, such as dropped packets
 
-
-    ip route # show routing table
-
+ip route # show routing table
+```
