@@ -22,12 +22,70 @@ Take advantage of ansible adhoc commands. For example, instead of writing a play
 
 `ansible node1.example.com -m yum -a "name=httpd state=present" --become`
 
+Or alternative
+
+`ansible web -m "command" -a "dnf install httpd -y`
+
 You won't need to preserve the playbook, focus on results, not method. 
 
-3. Speed up ansible navigator pull policy
+3. Shorthand
+
+While deprecated, you can save time by using this shorthand syntax
+
+```bash
+  tasks:
+    - name: Shorthand form
+      ansible.builtin.service: name=httpd enabled=true state=started
+```
+
+4. Speed up ansible navigator pull policy
 
 Ansible navigator is slow, speed it up by doing `--pp missing` or `--pp never`
-You can optionally generate an ansible-navigator.yml file and uncomment the lines there
+You can optionally generate an `ansible-navigator.yml` file and uncomment the lines there
+
+4. Type less
+
+Dont' copy and paste hosts. For example if you have an inventroy
+
+```
+servera.lab.example.com
+serverb.lab.example.com
+serverc.lab.example.com
+serverd.lab.example.com
+```
+
+You can use text expansion
+```
+server[a:d].lab.example.com
+```
+
+4. Vim tricks
+
+Enable yaml support in ~/.vimrc
+
+```
+autocmd FileType yaml setlocal ai ts=2 sw=2 et
+```
+
+5. Syntax check
+
+Quickly check the syntax of a play with `--syntax-check`
+
+```bash
+ansible-navigator run -m stdout foo.yml --syntax-check
+```
+
+6. Dry Run
+   
+Use `--check` to do a dry run
+```bash
+ansible-navigator run -m stdout foo.yml --syntax-check
+```
+
+7. Disable facts
+
+Disable the facts with `gather_facts: no` in playbooks to speed up the run.
+
 
 ## Setup
 
@@ -44,9 +102,11 @@ dnf install ansible-navigator vim rhel-system-roles
 To install the default exection environment, just run `ansible-navigator`
 
 ## Generate ansible navigator config
+Note that the redirect `>` will happen _before_ ansible-navigator runs, so it will create an empty file which causes ansible to fail. By moving the file after the fact, it works around this issue. 
 
 ```bash
-ansible-navigator settings --sample --eei ee-supported-rhel8 -m stdout --pp missing > ansible-navigator.yml
+ansible-navigator settings --sample --eei ee-supported-rhel8 -m stdout --pp missing > /tmp/ansible-navigator.yml
+mv /tmp/ansible-navigator.yml .
 ```
 
 ## Running
@@ -69,3 +129,10 @@ https://www.youtube.com/watch?v=f4_AI1yRAg4
 https://github.com/mateuszstompor/rhce-ex294-exam
 https://github.com/sandervanvugt/rhce8-book
 https://github.com/sandervanvugt/rhce8
+
+https://www.youtube.com/watch?v=iCWa4Me0ykM
+
+series
+
+https://www.youtube.com/watch?v=veZfOFdfV6o&list=PLcLWSRuj15cu9Dzrajokd9pgdnR81C3G3
+

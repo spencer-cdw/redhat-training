@@ -1,0 +1,186 @@
+---
+
+# TODO: install ansible navigator package
+# Configure inventory (touch inventory)
+
+
+- name: webserver1
+  hosts: webserver1
+  become: true
+  remote_user: ansible
+
+  tasks:
+    # - httpd installed, started, and enabled
+    - name: httpd installed
+      ansible.builtin.package:
+        name: httpd
+        state: present
+    
+    - name: start 
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: enable users
+      ansible.builtin.user:
+        name: foo #TODO: what is the user? 
+
+    # # - Password Authentication for SSH turned off
+    - name: disable password auth
+      ansible.builtin.lineinfile:
+        path: /etc/sshd/sshd.conf
+        regexp: PasswordAuthentication
+        line: PasswordAuthentication no
+      #TODO: restart sshd
+
+    - name: restart sshd
+      ansible.builtin.service:
+        name: sshd
+
+    
+    # - New role deployed
+    # - sudoers configured
+
+---
+
+# ansible-galaxy collection install community.general
+# ansible-doc lvol
+
+# - / dev/xvdg configured and mounted
+# - New users created
+# - Password Authentication for SSH turned off
+# - New role deployed
+# - sudoers configured
+# Use lvm module
+# setup disk with xfs /dev/xvdg
+# mounted persistently
+
+- name: dbserver
+  hosts: dbserver1
+  become: true
+  tasks: 
+    - name: Configure dbserver
+      lvg:
+        vg: RHCE
+        pvs:
+          - /dev/xvdg
+  
+    - name: lv
+      lvol:
+        vg: RHCE
+        lv: foo
+        size: 10g
+        pvs:
+          - /dev/xvdg
+  
+    - name: format
+      filesystem:
+        dev: /dev/RHCE/test
+        fstype: xfs
+  
+    - name: mount
+      ansible.posix.mount:
+        path: /data
+        src: /dev/RHCE/test
+        fstype: xfs
+        state: mounted
+
+---
+
+- name: andmi server one
+  hosts: adminserver1
+  become: true
+  remote_user: ansible
+  tasks:
+    - name: tcpdump
+      package: 
+        name: 
+         - tcpdump
+      
+    - name: groups
+      ansible.builtin.group:
+        name: jeff
+    - name: users
+      ansible.builtin.user:
+        name: jeff
+        groups: jeff
+
+
+---
+
+# create users adam, john, sarah on all servers
+
+- name: all users
+  hosts: all
+  become: true
+  tasks: 
+
+    - name: users
+      user:
+        name: "{{ name }}"
+      with_items: 
+        - adam
+        - john
+        - sarah
+
+--- 
+# Write a bash script that will query each server for its facts and save the output to /tmp
+
+# ansible foo.example.com -m setup
+
+ 
+---
+
+# Turn off password authentication on all servers
+# Ensure x11 forwarding is on for admin1
+
+- name: turn off password auth
+  hosts: all
+  become: true
+  gather_facts: no
+  tasks: 
+    - name: passwod auth
+      ansible.builtin.lineinfile:
+        path: /etc/sshd/sshd.conf
+        regexp: ^PasswordAuthentication
+        line: PasswordAuthentication no
+
+    - name: restart sshd password auth
+      service: 
+        name: sshd
+        state: restarted
+
+---
+
+- name: turn on x11 for admin1
+  hosts: admin1
+  become: true
+  gather_facts: no
+  tasks: 
+    - name: no x11
+      ansible.builtin.lineinfile:
+        path: /etc/sshd/sshd.conf
+        regexp: ^X11Forward
+        line: X11Forward yes
+
+    - name: restart sshd x11
+      service: 
+        name: sshd
+        state: restarted
+
+# ---
+
+# Create 2 custom roles, web and database
+
+# ansible-galaxy init web
+# ansible-galaxy init database
+
+# Edit main.yaml
+# - name: ensure user is created
+
+
+# Edit db.yaml
+# - hosts: dbserver
+# roles:
+#  - database
