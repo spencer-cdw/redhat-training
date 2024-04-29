@@ -6,7 +6,7 @@
 - vvv
 - vvvv
 
-```
+```yaml
 - name: Display free memory
   ansible.builtin.debug:
     msg: "Free memory for this system is {{ **ansible_facts[**'memfree_mb'] }}"

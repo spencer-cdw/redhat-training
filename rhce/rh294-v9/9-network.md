@@ -1,6 +1,6 @@
 # Network
 
-```
+```yaml
 - name: NIC Configuration
   hosts: webservers
   vars:

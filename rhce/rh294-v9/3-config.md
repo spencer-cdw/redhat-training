@@ -1,15 +1,13 @@
 # Config
 
 
-ansible navigator doesn't work with `--a
-
 
 
 ## Deploy ssh key
 
 Example playbook to deploy your ssh key everywhere (ssh-copy-id)
 (be sure to disable palybook-artifacts inansible-navigator.yaml and use `--ask-pass` option)
-```
+```yaml
 - name: Public key is deployed to managed hosts for Ansible
   hosts: all
 

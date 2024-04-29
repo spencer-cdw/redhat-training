@@ -1,7 +1,5 @@
 # Hosts
 
-
-
 ## AND
 
 Using `&` to only run on servers that are in the lab group and datacenter1 group.

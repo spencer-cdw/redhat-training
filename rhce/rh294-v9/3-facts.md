@@ -43,13 +43,13 @@ Save in `/etc/ansible/facts.d`
 
 custom.facts
 
-```bash
+```yaml
 [general]
 foo = bar
 ```
 
 Then reference it like so
 
-```
+```bash
 "{{ ansible_facts['ansible_local']['custom']['general']['foo']}}
 ```

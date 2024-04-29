@@ -15,14 +15,13 @@ ansible-vault create --vault-password-file=correct-horse-battery-staple secret.y
 
 ### View secret
 
-```
+```bash
 ansible-vault view secret.yml
 ```
 
-
 ### Edit secret
 
-```
+```bash
 ansible-vault edit secret.yml
 ```
 
@@ -35,6 +34,7 @@ ansible-vault decrypt secret.yml --output=foo.yml
 ## Playbooks
 
 Be sure to propt interactivly, or pass the password as a parameter to ansible-navigator
+
 ```bash
 ansible-navigator run -m stdout--playbook-artifact-enable false site.yml --vault-id @prompt
 ```

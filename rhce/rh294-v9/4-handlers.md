@@ -26,7 +26,6 @@ Handlers normally run after all other tasks in the play complete. A handler call
 Handler names exist in a per-play namespace. If two handlers are incorrectly given the same name, only one of them runs.
 
 
-
 ## Forcing handlers
 
 ```yaml

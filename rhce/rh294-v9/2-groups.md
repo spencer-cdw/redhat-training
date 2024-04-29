@@ -2,12 +2,13 @@
 
 Hosts can be in multiple groups
 
+```
 [usa]
 foo.example.com
 
 [canada]
 foo.example.com
-
+```
 
 ## Ranges
 
@@ -30,7 +31,7 @@ ansible-navigator inventory -m stdout --list
 
 ## Children groups
 
-```
+```yaml
 [raleigh]
 foo
 
@@ -48,6 +49,3 @@ mountainview
 ansible-navigator inventory -i inventory -m stdout --graph webservers
 ansible-navigator inventory -i inventory -m stdout --graph us
 ```
-
-
-

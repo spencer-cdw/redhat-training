@@ -2,7 +2,7 @@
 
 Setup a yum repo
 
-Remebmer to look at `ansible-doc -F` to find the `yum_repository` docs.
+Rememmer to look at `ansible-doc -F` to find the `yum_repository` docs.
 
 ```yaml
    - name: Ensure Example Repo exists
@@ -28,9 +28,7 @@ Note that installing a packages doesn't automatically update the facts that show
         manager: auto
 ```
 
-
 ## Batch uninstall
-
 
 ```bash
 ansible all -m ansible.builtin.dnf -a 'name=simple-agent state=absent'

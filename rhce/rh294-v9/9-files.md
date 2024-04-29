@@ -5,7 +5,7 @@ A more advanced example of managing users
 
 Suppose you are given a file `vars/users_vars.yml`
 
-```
+```yaml
 ---
 users:
   - username: user1
@@ -79,8 +79,6 @@ To add a single line to the sudoers file
     line: "%webadmin ALL=(ALL) NOPASSWD: ALL"
     validate: /usr/sbin/visudo -cf %s
 ```
-
-
 
 To  disable root login
 

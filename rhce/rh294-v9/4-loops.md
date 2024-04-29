@@ -90,7 +90,6 @@ For extra safety you can cast to a boolean
 ### Conditional examples
 
 
-
 - ansible_facts['machine'] == "x86_64"
 - max_memory == 512
 - min_memory < 128

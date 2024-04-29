@@ -2,7 +2,6 @@
 
 `ansible-galaxy collection install -r requirements.yml`
 
-
 ### Requirements.yml
 
 If you have a roles/requirements.yml ansible-navigator will automatically download dependencies

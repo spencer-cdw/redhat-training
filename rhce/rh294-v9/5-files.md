@@ -9,16 +9,12 @@ Commonly used modules
 - lineinfile
 - stat
 
-
-
 Less common file modules in `ansible.posix`
 
 - patch
 - synchronize
 
-
 # Templates
-
 
 ```yaml
 tasks:
