@@ -23,13 +23,6 @@ Delete a user in 20 minutes
 ```
 
 
-Reboot host
-```yaml
-- name: Reboot now
-  ansible.builtin.reboot:
-```
-
-
 Add a cron
 
 ```yaml
@@ -49,4 +42,26 @@ Add a cron
         user: devops
         cron_file: add-date-time
         state: present
+```
+
+To run every 2 minutes
+
+```yaml
+---
+- hosts: localhost
+  tasks:
+    - name: Schedule a task to run 'echo hi' every 2 minutes
+      cron:
+        name: "Echo hi every 2 minutes"
+        minute: "*/2"
+        job: "echo hi >> /tmp/hi.txt"
+```
+
+
+## Reboot
+
+Reboot host
+```yaml
+- name: Reboot now
+  ansible.builtin.reboot:
 ```

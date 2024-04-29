@@ -86,6 +86,13 @@ ansible-navigator run -m stdout foo.yml --syntax-check
 
 Disable the facts with `gather_facts: no` in playbooks to speed up the run.
 
+8. Documentation is key
+
+While you may have available some PDFs, you need to make sure to be able to find documentation quickly. 
+
+`ansible-doc -F` is very important for finding resources
+
+
 
 ## Setup
 

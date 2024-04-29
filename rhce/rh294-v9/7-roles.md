@@ -70,5 +70,39 @@ Usually ites best to avoid mixing roles and tasks in a single file.
     - role: role2
 ```
 
+You can also use `import_role`
 
 
+```yaml
+- name: Run a role as a task
+  hosts: remote.example.com
+  tasks:
+    - name: A task to include role2 here
+      ansible.builtin.import_role:
+        name: role2
+      vars:
+        var1: val1
+        var2: val2
+```
+
+You can pass in vars like so:
+
+```yaml
+---
+- name: A play that runs the second role with variables
+  hosts: remote.example.com
+  roles:
+    - role: role1
+    - role: role2
+      var1: val1
+      var2: val2
+```
+
+
+This would also work
+
+```yaml
+  roles:
+    - role: role1
+    - { role: role2, var1: val1, var2: val2 }
+```
