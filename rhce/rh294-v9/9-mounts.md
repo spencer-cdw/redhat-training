@@ -77,7 +77,7 @@ You can alternativly pass the vars in under the vars section
           - name: mylv
             size: 2G
             fs_type: ext4
-            mount_point: /mnt/dat
+            mount_point: /mnt/data
 ```
 
 

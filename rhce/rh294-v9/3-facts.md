@@ -16,7 +16,7 @@ After 2.5 they standarzied on the hash syntax
 
 You can gather facts even if gather facts is no
 
-```
+```yaml
 - name: Collect all facts except for hardware facts
   ansible.builtin.setup:
     gather_subset:
@@ -36,7 +36,6 @@ You can gather facts even if gather facts is no
         var: hostvars['demo2.example.com']['ansible_facts']['interfaces']
 ```
 
-
 ### Custom facts
 
 Save in `/etc/ansible/facts.d`
@@ -52,4 +51,24 @@ Then reference it like so
 
 ```bash
 "{{ ansible_facts['ansible_local']['custom']['general']['foo']}}
+```
+
+
+## Tips
+
+To get all facts
+
+```bash
+ansible foo.example.com -m setup
+```
+
+or
+
+```bash
+ansible foo.example.com -m debug -a "{{ ansible_facts }}"
+ansible foo.example.com -m debug -a "{{ group_names }}"
+ansible foo.example.com -m debug -a "{{ groups }}"
+ansible foo.example.com -m debug -a "{{ hostvars }}"
+
+
 ```

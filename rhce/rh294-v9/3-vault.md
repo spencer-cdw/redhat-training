@@ -33,7 +33,7 @@ ansible-vault decrypt secret.yml --output=foo.yml
 
 ## Playbooks
 
-Be sure to propt interactivly, or pass the password as a parameter to ansible-navigator
+Be sure to prompt interactivly, or pass the password as a parameter to ansible-navigator
 
 ```bash
 ansible-navigator run -m stdout--playbook-artifact-enable false site.yml --vault-id @prompt

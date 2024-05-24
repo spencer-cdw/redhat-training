@@ -59,11 +59,11 @@ You can use text expansion
 server[a:d].lab.example.com
 ```
 
-4. Vim tricks
+1. Vim tricks
 
 Enable yaml support in ~/.vimrc
 
-```
+```bash
 autocmd FileType yaml setlocal ai ts=2 sw=2 et
 ```
 
@@ -91,7 +91,6 @@ Disable the facts with `gather_facts: no` in playbooks to speed up the run.
 While you may have available some PDFs, you need to make sure to be able to find documentation quickly. 
 
 `ansible-doc -F` is very important for finding resources
-
 
 
 ## Setup
