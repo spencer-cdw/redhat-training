@@ -1,5 +1,8 @@
 # Network
 
+To configure network use `redhat.rhel_system_roles.network`. 
+For documentation see /usr/share/ansible/roles/redhat.rhel_system_roles.network/README.md
+
 ```yaml
 - name: NIC Configuration
   hosts: webservers

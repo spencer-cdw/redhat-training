@@ -21,7 +21,13 @@ Delete a user in 20 minutes
     hour: 16
     weekday: 5
 ```
+Note: This will create the cron in the 'testing' user's crontab.
+To make it present in `/etc/cron.d` instead use the `cron_file` attribute.
 
+```yaml
+user: testing
+cron_file: foobar # creates /etc/cron.d/foobar
+```
 
 Add a cron
 

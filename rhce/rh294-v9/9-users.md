@@ -15,7 +15,6 @@ Crate a ssh key
 
 ## Known Hosts
 
-
 ```yaml
 - name: Copy host keys to remote servers
   ansible.builtin.known_hosts:

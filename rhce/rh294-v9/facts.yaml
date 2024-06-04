@@ -1,0 +1,10 @@
+# ansible-playbook facts.yaml
+---
+- hosts: localhost
+  tasks:
+    - name: Gather facts
+      setup:
+
+    - name: Display facts
+      debug:
+        var: ansible_facts

@@ -33,3 +33,45 @@ Note that installing a packages doesn't automatically update the facts that show
 ```bash
 ansible all -m ansible.builtin.dnf -a 'name=simple-agent state=absent'
 ```
+
+## DNF Upgrade
+
+Install the latest version of all packages
+
+```yaml
+- name: Upgrade all packages
+  ansible.builtin.dnf:
+    name: '*'
+    state: latest
+```
+
+
+## Group installs
+
+To install a group, use `@` and group name
+
+`dnf group list`
+
+```yaml
+- name: Install Development Tools
+  ansible.builtin.dnf:
+    name: '@Development Tools'
+    state: present
+```
+
+
+## Package facts
+
+You may need to get facts about installed packages
+
+```yaml
+- name: Gather Package Facts
+  ansible.builtin.package_facts:
+    manager: auto
+```
+
+Then you can reference facts at `ansible_facts['packages']`
+
+```yaml
+when: custom_pkg in ansible_facts['packages']
+```

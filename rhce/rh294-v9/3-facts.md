@@ -64,11 +64,30 @@ ansible foo.example.com -m setup
 
 or
 
+(however since facts are stateless, this may not work in all situations)
+
 ```bash
-ansible foo.example.com -m debug -a "{{ ansible_facts }}"
-ansible foo.example.com -m debug -a "{{ group_names }}"
-ansible foo.example.com -m debug -a "{{ groups }}"
-ansible foo.example.com -m debug -a "{{ hostvars }}"
+ansible foo.example.com -m debug -a "msg={{ ansible_facts }}"
+ansible foo.example.com -m debug -a "msg={{ group_names }}"
+ansible foo.example.com -m debug -a "msg={{ groups }}"
+ansible foo.example.com -m debug -a "msg={{ hostvars }}"
+```
 
+Here is a more verbose example that works in all situations
 
+```yaml
+- hosts: localhost
+  tasks:
+    - name: Gather facts
+      setup:
+
+    - name: Display facts
+      debug:
+        var: ansible_facts
+```
+
+Or a more programatic way
+
+```
+ansible -m setup localhost -o | sed 's/^.*=> //' | jq .
 ```
