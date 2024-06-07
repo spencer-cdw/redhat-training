@@ -30,6 +30,8 @@ This imports the following yaml files
 - roles/role2/vars/main.yml
 
 
+`ansible.builtin.import_role` will expose default variables to the rest of the play whereas `ansible.builtin.include_role` will not.
+
 
 ### Import with Vars
 
@@ -70,7 +72,7 @@ Usually ites best to avoid mixing roles and tasks in a single file.
     - role: role2
 ```
 
-You can also use `import_role`
+Best practice to combine roles and tasks is to use `ansible.builtin.import_role` or `ansible.builtin.include_roles` 
 
 
 ```yaml
@@ -106,3 +108,8 @@ This would also work
     - role: role1
     - { role: role2, var1: val1, var2: val2 }
 ```
+
+
+## Create Role
+
+You can create roles manually, or use `ansible-galaxy role init`. 

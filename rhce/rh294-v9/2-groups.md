@@ -2,7 +2,7 @@
 
 Hosts can be in multiple groups
 
-```
+```yaml
 [usa]
 foo.example.com
 
@@ -23,7 +23,7 @@ washington[1:2].example.com
 
 ## Verify inventory
 
-```
+```bash
 ansible-navigator inventory -m stdout --host foo.example.com
 ansible-navigator inventory -m stdout --list
 ```

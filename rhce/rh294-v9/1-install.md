@@ -1,10 +1,12 @@
 # Install
 
+You will need `ansible-core` and `rhel-system-roles`. 
+While the study guide focuses on ansible-navigator, the exam won't levarage ansible-navigator at all. 
+
 ```bash
 sudo dnf install ansible-navigator ansible-core
 ```
 
-Optional but recomended
 Make sure you have AppStream package repository enabled `rhel-9-for-x86_64-appstream-rpms`
 
 ```bash

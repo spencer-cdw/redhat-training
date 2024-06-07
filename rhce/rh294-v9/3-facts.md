@@ -9,7 +9,7 @@ After 2.5 they standarzied on the hash syntax
 
 - ansible_facts['hostname']
 - ansible_facts['fqdn']
-- ansible-facts['default_ipv4']['address']
+- ansible_facts['default_ipv4']['address']
 
 
 ### Force gather facts

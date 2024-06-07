@@ -1,8 +1,6 @@
 # Config
 
 
-
-
 ## Deploy ssh key
 
 Example playbook to deploy your ssh key everywhere (ssh-copy-id)

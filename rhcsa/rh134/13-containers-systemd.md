@@ -19,7 +19,6 @@ sudo passwd foobar-adm
 **You can't `sudo` or `su` to the user account, you must have a full login session**
 
 
-
 ```bash
 ssh foobar@host
 podman run -d --name webserver -p 8080:8080 -v ~/app-artifacts:/var/www/html:Z registry.access.redhat.com/ubi8/httpd-24

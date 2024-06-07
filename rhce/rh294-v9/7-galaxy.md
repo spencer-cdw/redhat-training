@@ -6,7 +6,7 @@
 
 If you have a roles/requirements.yml ansible-navigator will automatically download dependencies
 
-```
+```yaml
 - src: https://git.example.com/someuser/someuser.myrole
   scm: git
   version: "1.5.0"
