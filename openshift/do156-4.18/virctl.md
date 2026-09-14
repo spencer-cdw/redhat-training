@@ -87,3 +87,54 @@ or with oc by connecting to the virt-launcher pod
 oc port-forward pod/virt-launcer-postgresql-rhel9-fbxws 22080:80
 ```
 
+
+
+## Create vm
+
+Note that the volume comes from the rhel9-mariadb data source is in the openshift-virtualization-os-images namespace. 
+
+This isn't easy to find in the docs, need to look at examples. 
+
+`virtctl create --help | grep -i datasource`
+
+```yaml
+echo 'foobar' > developer-password
+virtctl create vm \
+  --name rhel9-database \
+  --namespace accessing-clicreate --memory 5Gi \
+  --volume-import type:ds,src:openshift-virtualization-os-images/rhel9-mariadb \
+  --user developer --password-file developer-password \
+  --ssh-key "$(cat ~/.ssh/lab_rsa.pub)" \
+  > rhel9-database.yaml
+oc apply rhel9-database.yaml
+oc get vm
+```
+
+
+## Edit vm
+
+You can edit vms with `oc edit` command. 
+It will open a yaml file in vm, saving will apply changes. 
+
+```bash
+oc edit vm foobar
+```
+
+If you re reun oc get vm foobar, you'll see a warning message
+
+> "message": "memory updated in template spec to a value lower than what the VM started with",
+
+## Check vm
+
+```bash
+oc get vm rhel9-database
+oc describe vm foobar
+```
+
+
+## Port Forward
+
+```bash
+virtctl port-forward vm/rhel9-database 13306:3306
+mysql -h 127.0.0.1 -u devuser -p'developer' --port 13306 sakila
+```
