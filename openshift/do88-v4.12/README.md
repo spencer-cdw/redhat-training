@@ -5,7 +5,7 @@
 Pointer to image (e.g container)
 
 ### Deployment
-Refernces an image stream
+References an image stream
 
 ### Pod
 
