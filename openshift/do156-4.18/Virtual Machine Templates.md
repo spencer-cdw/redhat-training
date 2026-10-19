@@ -2,13 +2,14 @@
 
 https://rol.redhat.com/rol/app/courses/do156-4.18/pages/ch03s03
 
-
-CX | compute exclusive
-GN | GPU Nvidia
-M | Memory
-N | Network (DPDK, VNF)
-O | Overcommitted (Burt, Spot instances)
-U | Universal | General Purpose
+| | | 
+|---| ---| 
+| CX | compute exclusive
+| GN | GPU Nvidia
+| M | Memory
+| N | Network (DPDK, VNF)
+| O | Overcommitted (Burt, Spot instances)
+| U | Universal | General Purpose
 
 
 

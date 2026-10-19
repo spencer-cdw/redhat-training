@@ -1,6 +1,6 @@
 # virtcl
 
-virctl is the kubevirt command line interface. 
+virtctl is the kubevirt command line interface. 
 
 
 Get vm instances with oc command
@@ -21,8 +21,7 @@ virt-launcher-rhel9-test-4x8fl   1/1     Running   0          8m31s
 
 ## Stop VM
 
-virtctl stop rhel9-test
-
+`virtctl stop rhel9-test`
 
 
 # Topics
@@ -88,7 +87,6 @@ oc port-forward pod/virt-launcer-postgresql-rhel9-fbxws 22080:80
 ```
 
 
-
 ## Create vm
 
 Note that the volume comes from the rhel9-mariadb data source is in the openshift-virtualization-os-images namespace. 
@@ -96,6 +94,9 @@ Note that the volume comes from the rhel9-mariadb data source is in the openshif
 This isn't easy to find in the docs, need to look at examples. 
 
 `virtctl create --help | grep -i datasource`
+
+Datasource is the openshift term for a golden image. 
+They are stored in the 'openshift-virtualization-os-image' namespace by default
 
 ```yaml
 echo 'foobar' > developer-password
@@ -138,7 +139,6 @@ virtctl port-forward vm/rhel9-database 13306:3306
 mysql -h 127.0.0.1 -u devuser -p'developer' --port 13306 sakila
 ```
 
-
 ## Logs
 
 ```bash
@@ -151,7 +151,6 @@ oc exec will get you access, use `--` to specify the entrypoint
 ```bash
 oc exec -it virt-launcher-foobar-pod -n namespace -- /bin/bash
 ```
-
 
 
 ## Information commands
@@ -181,5 +180,10 @@ virtctl vmexport download <vmexport_name> --vm\|pvc=<object_name> \
 
 ## Image uploads
 
+```bash
 virtctl image-upload dv <datavolume_name> --image-path=</path/to/image> --no-create
+```
+
+```bash
 virtctl image-upload dv <datavolume_name> --size=<datavolume_size> --image-path=</path/to/image>
+```
