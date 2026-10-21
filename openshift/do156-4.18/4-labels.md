@@ -15,6 +15,7 @@ spec:
 
 
 **You must restart the VM before the labels are applied**
+
 Migration isn't enough. 
 
 You can verify by slecting the pod and observing that the label is also on the virt-launcher pod

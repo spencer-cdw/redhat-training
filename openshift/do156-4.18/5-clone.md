@@ -19,7 +19,7 @@ Linux
 
 ## clone by command line
 
-`virtctl crate clone --source-name golden-vm --target-name new-vm` 
+`virtctl create clone --source-name golden-vm --target-name new-vm` 
 
 Alternativly you could look at the spec and make a yaml
 ```bash
@@ -66,6 +66,8 @@ If backend doesn't support snapshots, openshift starts kbuernets pods to copy th
 
 `virtctl guestfs` is the tool to sysprep image
 
+It mounts the image into a temporary pod with image tools available. 
+
 Get the volume name of golden image
 `oc get dv | grep -i golden`
 
@@ -79,7 +81,7 @@ find / -type f -name *sysprep
 /usr/bin/virt-sysprep -a /dev/vda
 ```
 
-Note that /dev/vda is not intuitive, you would just need to knowt hat you are inisde the a pod with tools and that it mounted the PVC named sda at /dev/vda
+Note that /dev/vda is not intuitive, you would just need to know that you are inisde the a pod with tools and that it mounted the PVC named sda at /dev/vda
 
 
 ---

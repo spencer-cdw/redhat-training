@@ -6,13 +6,15 @@ The links are protect with secret `export-token-export_name`
 Downloads are aviable as `raw` or `gzip`
 
 ```bash
-virtctl vmexport create --fm=fedora-vm fedora-export
+virtctl vmexport create --vm=fedora-vm fedora-export
 virtctl vmexport download fedora-export --keep-vme --manifest --include-secret --output fedora-vm.yml
 ```
 
 Or manually download the vm volume
 
-`virtctl vmexport download fedora-export --keep-vme --volume fedora-vm --output fedora-vm-disk.img.gz`
+```bash
+virtctl vmexport download fedora-export --keep-vme --volume fedora-vm --output fedora-vm-disk.img.gz
+```
 
 Export from snapshot
 
@@ -21,7 +23,9 @@ virtctl vmexport create --snapshot=fedora-snapshot fedora-export-snapshot
 virtctl vmexport delete fedora-export-snapshot
 ```
 
-`oc get vmexport`
+```bash
+oc get vmexport
+```
 
 To view the schema
 
@@ -63,3 +67,11 @@ Status:
   Virtual Machine Name:  fedora-vm
 ```
 
+
+
+Note that when doing a virtctl vmexport download, you need to specify the vmexport kind. The 2 options are
+
+```bash
+--vm foobar
+--vmtemplate foobar
+```
