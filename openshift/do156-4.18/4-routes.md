@@ -25,5 +25,9 @@ oc expose service/hello-world
 ### Why 3
 
 oc expose = generic to create service or route for service or pod
-oc create route = direct, manually defines route for existing service
+oc create route = direct, manually defines route for existing service (least comon)
 virtcl expose vm = Specific for vms 
+
+When working with vms, use virtctl expose
+all other times use oc expose
+Only use oc create for special circumstances
