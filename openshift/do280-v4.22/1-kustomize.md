@@ -60,5 +60,26 @@ spec:
       env: prod
 ```
 
-## Generators
+## Secrets
 
+You can see the secret reference with `oc get deployment foobar -o json`
+
+The reference is stored in the spec 'envFrom'
+```bash
+oc get deployment exoplanets \
+-o jsonpath='{.spec.template.spec.containers[0].envFrom}{"\n"}'
+```
+
+You can get values of secrets with oc extract
+
+`oc extract secret/db-secrets-55cbgc8c6m --to -`
+
+
+Secrets shouldn't be stored in git, should pull from a .env file or secret manager
+
+```yaml
+secretGenerator:
+- name: database-creds
+  envs:
+  - .env.secret
+``` 
