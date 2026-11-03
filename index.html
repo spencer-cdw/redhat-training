@@ -23,9 +23,14 @@
             <p class="terminal-copy">Select a course family to begin your session.</p>
 
             <div class="path-options" role="group" aria-label="Training path">
-              <button class="path-option is-selected" id="path-aap" type="button" aria-pressed="true">
+              <button class="path-option is-selected" id="path-administration" type="button" aria-pressed="true">
+                <span class="option-code">[ R ]</span>
+                <span class="option-name">Red Hat Administration</span>
+                <span class="option-description">Linux and system administration</span>
+              </button>
+              <button class="path-option" id="path-ansible" type="button" aria-pressed="false">
                 <span class="option-code">[ A ]</span>
-                <span class="option-name">AAP</span>
+                <span class="option-name">Ansible</span>
                 <span class="option-description">Ansible Automation Platform</span>
               </button>
               <button class="path-option" id="path-openshift" type="button" aria-pressed="false">
@@ -34,7 +39,7 @@
                 <span class="option-description">Container platform</span>
               </button>
             </div>
-            <p class="terminal-hint"><kbd>A</kbd> <kbd>O</kbd> SELECT <span aria-hidden="true">/</span> <kbd>←</kbd> <kbd>→</kbd> MOVE <span aria-hidden="true">/</span> <kbd>ENTER</kbd> CONFIRM</p>
+            <p class="terminal-hint"><kbd>R</kbd> <kbd>A</kbd> <kbd>O</kbd> SELECT <span aria-hidden="true">/</span> <kbd>←</kbd> <kbd>→</kbd> MOVE <span aria-hidden="true">/</span> <kbd>ENTER</kbd> CONFIRM</p>
           </section>
 
           <section class="terminal-view class-screen" id="class-screen" aria-labelledby="class-title" hidden>
@@ -42,7 +47,12 @@
             <h2 id="class-title">Choose a class to start</h2>
             <div class="ncurses-menu" role="group" aria-label="OpenShift classes">
               <div class="menu-title"> Available classes </div>
-              <button class="menu-option is-selected" type="button" data-course="DO156-4.18" aria-pressed="true">
+              <button class="menu-option is-selected" type="button" data-course="DO88" aria-pressed="true">
+                <span class="menu-pointer" aria-hidden="true">▶</span>
+                <span>DO88</span>
+                <span class="menu-enter">[ ENTER ]</span>
+              </button>
+              <button class="menu-option" type="button" data-course="DO156-4.18" aria-pressed="false">
                 <span class="menu-pointer" aria-hidden="true">▶</span>
                 <span>DO156-4.18</span>
                 <span class="menu-enter">[ ENTER ]</span>
@@ -57,10 +67,56 @@
             <button class="text-button" id="back-to-paths" type="button">← Back to training paths</button>
           </section>
 
+          <section class="terminal-view class-screen" id="ansible-screen" aria-labelledby="ansible-title" hidden>
+            <p class="terminal-kicker">ANSIBLE / COURSE SELECT</p>
+            <h2 id="ansible-title">Choose a track to start</h2>
+            <div class="ncurses-menu" role="group" aria-label="Ansible tracks">
+              <div class="menu-title"> Available tracks </div>
+              <button class="menu-option is-selected" id="ansible-course-do374" type="button" data-course="DO374" aria-pressed="true">
+                <span class="menu-pointer" aria-hidden="true">▶</span>
+                <span>DO374</span>
+                <span class="menu-enter">[ ENTER ]</span>
+              </button>
+              <div class="menu-footer">↑ / ↓ MOVE&nbsp;&nbsp; ENTER SELECT&nbsp;&nbsp; ESC BACK</div>
+            </div>
+            <button class="text-button" id="ansible-back" type="button">← Back to training paths</button>
+          </section>
+
+          <section class="terminal-view class-screen" id="admin-cert-screen" aria-labelledby="admin-cert-title" hidden>
+            <p class="terminal-kicker">RED HAT ADMINISTRATION / CERTIFICATION SELECT</p>
+            <h2 id="admin-cert-title">Choose a certification</h2>
+            <div class="ncurses-menu" role="group" aria-label="Red Hat certifications">
+              <div class="menu-title"> Available certifications </div>
+              <button class="menu-option is-selected" type="button" data-certification="RHCE" aria-pressed="true">
+                <span class="menu-pointer" aria-hidden="true">▶</span>
+                <span>RHCE</span>
+                <span class="menu-enter">[ ENTER ]</span>
+              </button>
+              <button class="menu-option" type="button" data-certification="RHCSA" aria-pressed="false">
+                <span class="menu-pointer" aria-hidden="true">▶</span>
+                <span>RHCSA</span>
+                <span class="menu-enter">[ ENTER ]</span>
+              </button>
+              <div class="menu-footer">↑ / ↓ MOVE&nbsp;&nbsp; ENTER SELECT&nbsp;&nbsp; ESC BACK</div>
+            </div>
+            <button class="text-button" id="admin-cert-back" type="button">← Back to training paths</button>
+          </section>
+
+          <section class="terminal-view class-screen" id="admin-course-screen" aria-labelledby="admin-course-title" hidden>
+            <p class="terminal-kicker" id="admin-course-kicker">RED HAT ADMINISTRATION / COURSE SELECT</p>
+            <h2 id="admin-course-title">Choose a course</h2>
+            <div class="ncurses-menu" role="group" aria-label="Red Hat Administration courses">
+              <div class="menu-title" id="admin-course-menu-title"> Available courses </div>
+              <div id="admin-course-options"></div>
+              <div class="menu-footer">↑ / ↓ MOVE&nbsp;&nbsp; ENTER SELECT&nbsp;&nbsp; ESC BACK</div>
+            </div>
+            <button class="text-button" id="admin-course-back" type="button">← Back to certifications</button>
+          </section>
+
           <section class="terminal-view aap-screen" id="aap-screen" aria-labelledby="aap-title" hidden>
-            <p class="terminal-kicker" id="aap-kicker">AAP / DECK STATUS</p>
-            <h2 id="aap-title">No AAP deck loaded.</h2>
-            <p class="terminal-copy" id="aap-message">AAP flashcards can be added when its YAML deck is ready.</p>
+            <p class="terminal-kicker" id="aap-kicker">ANSIBLE / DECK STATUS</p>
+            <h2 id="aap-title">No Ansible deck loaded.</h2>
+            <p class="terminal-copy" id="aap-message">Ansible flashcards can be added when its YAML deck is ready.</p>
             <button class="text-button" id="aap-back" type="button">← Back to training paths</button>
           </section>
 

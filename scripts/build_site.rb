@@ -70,7 +70,12 @@ fail_validation("no course flashcards.yaml files found") if DECK_PATHS.empty?
 
 decks = DECK_PATHS.map do |deck_path|
   begin
-    deck = YAML.safe_load(File.read(deck_path), [], [], false)
+    deck = YAML.safe_load(
+      File.read(deck_path),
+      permitted_classes: [],
+      permitted_symbols: [],
+      aliases: false,
+    )
   rescue Psych::Exception => error
     fail_validation("#{deck_path.sub("#{ROOT}/", "")}: YAML parse error: #{error.message}")
   end

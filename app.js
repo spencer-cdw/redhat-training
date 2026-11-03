@@ -1,16 +1,29 @@
-const paths = ["AAP", "OpenShift"];
-const courseOptions = [...document.querySelectorAll(".menu-option")];
+const paths = ["Red Hat Administration", "Ansible", "OpenShift"];
+const openShiftCourseOptions = [...document.querySelectorAll("#class-screen .menu-option")];
+const ansibleCourseOptions = [...document.querySelectorAll("#ansible-screen .menu-option")];
+let courseOptions = openShiftCourseOptions;
 const pathOptions = [...document.querySelectorAll(".path-option")];
+const certificationOptions = [...document.querySelectorAll("[data-certification]")];
 const screens = {
   home: document.querySelector("#home-screen"),
   classes: document.querySelector("#class-screen"),
+  ansible: document.querySelector("#ansible-screen"),
+  adminCerts: document.querySelector("#admin-cert-screen"),
+  adminCourses: document.querySelector("#admin-course-screen"),
   aap: document.querySelector("#aap-screen"),
   study: document.querySelector("#study-screen"),
+};
+const adminCoursesByCertification = {
+  RHCE: ["RH294-v9"],
+  RHCSA: ["RH124", "RH134"],
 };
 
 let stage = "home";
 let selectedPath = 0;
 let selectedClass = 0;
+let selectedCertification = 0;
+let activeCategory = "OpenShift";
+let activeCertification = "";
 let cards = [];
 let currentIndex = 0;
 let activeCourse = "";
@@ -78,16 +91,25 @@ function selectClass(index) {
   });
 }
 
-function showDeckStatus(title, message, backToClasses) {
+function selectCertification(index) {
+  selectedCertification = (index + certificationOptions.length) % certificationOptions.length;
+  certificationOptions.forEach((option, optionIndex) => {
+    const isSelected = optionIndex === selectedCertification;
+    option.classList.toggle("is-selected", isSelected);
+    option.setAttribute("aria-pressed", String(isSelected));
+  });
+}
+
+function showDeckStatus(title, message, backToClasses, category = "Ansible") {
   stage = backToClasses ? "course-unavailable" : "aap";
   showScreen("aap");
-  document.querySelector("#aap-kicker").textContent = backToClasses
-    ? "OPENSHIFT / DECK STATUS"
-    : "AAP / DECK STATUS";
+  document.querySelector("#aap-kicker").textContent = `${category.toUpperCase()} / DECK STATUS`;
   document.querySelector("#aap-title").textContent = title;
   document.querySelector("#aap-message").textContent = message;
   document.querySelector("#aap-back").textContent = backToClasses
-    ? "← Back to OpenShift classes"
+    ? category === "Red Hat Administration"
+      ? `← Back to ${activeCertification} courses`
+      : `← Back to ${category} classes`
     : "← Back to training paths";
   resetScreenScroll();
   scrollTo(screens.aap);
@@ -97,7 +119,12 @@ function showDeckStatus(title, message, backToClasses) {
 function choosePath(index) {
   selectPath(index);
 
-  if (paths[index] === "OpenShift") {
+  const category = paths[index];
+  activeCategory = category;
+  if (category === "OpenShift") {
+    courseOptions = openShiftCourseOptions;
+    selectedClass = 0;
+    selectClass(selectedClass);
     stage = "classes";
     showScreen("home");
     screens.classes.hidden = false;
@@ -107,11 +134,80 @@ function choosePath(index) {
     return;
   }
 
+  if (category === "Ansible") {
+    courseOptions = ansibleCourseOptions;
+    selectedClass = 0;
+    selectClass(selectedClass);
+    stage = "classes";
+    showScreen("home");
+    screens.ansible.hidden = false;
+    scrollTo(screens.ansible);
+    courseOptions[selectedClass].focus({ preventScroll: true });
+    announcer.textContent = "Choose the DO374 Ansible track.";
+    return;
+  }
+
+  if (category === "Red Hat Administration") {
+    stage = "admin-certifications";
+    showScreen("home");
+    screens.adminCerts.hidden = false;
+    scrollTo(screens.adminCerts);
+    certificationOptions[selectedCertification].focus({ preventScroll: true });
+    announcer.textContent = "Choose RHCE or RHCSA.";
+    return;
+  }
+
   showDeckStatus(
-    "No AAP deck loaded.",
-    "AAP flashcards can be added when its YAML deck is ready.",
+    `No ${category} deck loaded.`,
+    `${category} flashcards can be added when its YAML deck is ready.`,
     false,
+    category,
   );
+}
+
+function showAdminCourses(certification) {
+  activeCertification = certification;
+  const optionsContainer = document.querySelector("#admin-course-options");
+  optionsContainer.replaceChildren();
+  courseOptions = adminCoursesByCertification[certification].map((course) => {
+    const button = document.createElement("button");
+    const pointer = document.createElement("span");
+    const label = document.createElement("span");
+    const enter = document.createElement("span");
+
+    button.className = "menu-option";
+    button.type = "button";
+    button.dataset.course = course;
+    button.setAttribute("aria-pressed", "false");
+    pointer.className = "menu-pointer";
+    pointer.setAttribute("aria-hidden", "true");
+    pointer.textContent = "▶";
+    label.textContent = course;
+    enter.className = "menu-enter";
+    enter.textContent = "[ ENTER ]";
+    button.append(pointer, label, enter);
+    optionsContainer.append(button);
+    return button;
+  });
+  document.querySelector("#admin-course-kicker").textContent =
+    `RED HAT ADMINISTRATION / ${certification} COURSES`;
+  document.querySelector("#admin-course-title").textContent = `Choose a ${certification} course`;
+  document.querySelector("#admin-course-menu-title").textContent =
+    ` ${certification} courses `;
+  selectedClass = 0;
+  selectClass(selectedClass);
+  stage = "admin-courses";
+  screens.adminCerts.hidden = true;
+  screens.adminCourses.hidden = false;
+  scrollTo(screens.adminCourses);
+  courseOptions[selectedClass].focus({ preventScroll: true });
+  courseOptions.forEach((option, index) => {
+    option.addEventListener("click", () => {
+      selectClass(index);
+      startCourse();
+    });
+  });
+  announcer.textContent = `${certification} courses: ${adminCoursesByCertification[certification].join(", ")}.`;
 }
 
 function shuffle(items) {
@@ -382,11 +478,29 @@ function returnToPaths() {
 }
 
 function returnToClasses() {
-  stage = "classes";
   showScreen("home");
-  screens.classes.hidden = false;
-  scrollTo(screens.classes);
+  if (activeCategory === "Red Hat Administration") {
+    stage = "admin-courses";
+    screens.adminCourses.hidden = false;
+    scrollTo(screens.adminCourses);
+  } else if (activeCategory === "Ansible") {
+    stage = "classes";
+    screens.ansible.hidden = false;
+    scrollTo(screens.ansible);
+  } else {
+    stage = "classes";
+    screens.classes.hidden = false;
+    scrollTo(screens.classes);
+  }
   courseOptions[selectedClass].focus({ preventScroll: true });
+}
+
+function returnToAdminCertifications() {
+  stage = "admin-certifications";
+  showScreen("home");
+  screens.adminCerts.hidden = false;
+  scrollTo(screens.adminCerts);
+  certificationOptions[selectedCertification].focus({ preventScroll: true });
 }
 
 async function startCourse() {
@@ -397,6 +511,7 @@ async function startCourse() {
       `No deck loaded for ${activeCourse}.`,
       "A course deck can be added alongside its notes.",
       true,
+      activeCategory,
     );
     return;
   }
@@ -418,6 +533,7 @@ async function startCourse() {
       `Unable to load ${activeCourse}.`,
       error instanceof Error ? error.message : "The deck could not be loaded.",
       true,
+      activeCategory,
     );
     return;
   }
@@ -546,14 +662,30 @@ function goToCard(index) {
 pathOptions.forEach((option, index) => {
   option.addEventListener("click", () => choosePath(index));
 });
+certificationOptions.forEach((option, index) => {
+  option.addEventListener("click", () => {
+    selectCertification(index);
+    showAdminCourses(option.dataset.certification);
+  });
+});
 courseOptions.forEach((option, index) => {
   option.addEventListener("click", () => {
     selectClass(index);
     startCourse();
   });
 });
+ansibleCourseOptions.forEach((option, index) => {
+  option.addEventListener("click", () => {
+    courseOptions = ansibleCourseOptions;
+    selectClass(index);
+    startCourse();
+  });
+});
 
 document.querySelector("#back-to-paths").addEventListener("click", returnToPaths);
+document.querySelector("#ansible-back").addEventListener("click", returnToPaths);
+document.querySelector("#admin-cert-back").addEventListener("click", returnToPaths);
+document.querySelector("#admin-course-back").addEventListener("click", returnToAdminCertifications);
 document.querySelector("#aap-back").addEventListener("click", () => {
   if (stage === "course-unavailable") {
     returnToClasses();
@@ -590,9 +722,9 @@ document.addEventListener("keydown", (event) => {
     return;
   }
 
-  if (stage === "home" && ["a", "o"].includes(event.key.toLowerCase())) {
+  if (stage === "home" && ["r", "a", "o"].includes(event.key.toLowerCase())) {
     event.preventDefault();
-    const nextPath = event.key.toLowerCase() === "a" ? 0 : 1;
+    const nextPath = { r: 0, a: 1, o: 2 }[event.key.toLowerCase()];
     selectPath(nextPath);
     pathOptions[nextPath].focus();
     return;
@@ -607,7 +739,16 @@ document.addEventListener("keydown", (event) => {
     return;
   }
 
-  if (stage === "classes" && (event.key === "ArrowUp" || event.key === "ArrowDown")) {
+  if (stage === "admin-certifications" && (event.key === "ArrowUp" || event.key === "ArrowDown")) {
+    event.preventDefault();
+    const direction = event.key === "ArrowDown" ? 1 : -1;
+    selectCertification(selectedCertification + direction);
+    certificationOptions[selectedCertification].focus();
+    return;
+  }
+
+  if (["classes", "admin-courses"].includes(stage) &&
+      (event.key === "ArrowUp" || event.key === "ArrowDown")) {
     event.preventDefault();
     const direction = event.key === "ArrowDown" ? 1 : -1;
     selectClass(selectedClass + direction);
@@ -616,8 +757,10 @@ document.addEventListener("keydown", (event) => {
   }
 
   if (event.key === "Escape") {
-    if (stage === "classes" || stage === "aap") {
+    if (stage === "classes" || stage === "admin-certifications" || stage === "aap") {
       returnToPaths();
+    } else if (stage === "admin-courses") {
+      returnToAdminCertifications();
     } else if (stage === "course-unavailable") {
       returnToClasses();
     } else if (stage === "study") {
@@ -633,3 +776,4 @@ document.addEventListener("keydown", (event) => {
 
 selectPath(selectedPath);
 selectClass(selectedClass);
+selectCertification(selectedCertification);

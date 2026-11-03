@@ -175,7 +175,7 @@ h1 {
 
 .path-options {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   margin-top: 37px;
 }
@@ -183,6 +183,7 @@ h1 {
 .path-option {
   display: flex;
   min-height: 173px;
+  min-width: 0;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
@@ -212,9 +213,10 @@ h1 {
 .option-name {
   margin-top: 16px;
   color: var(--phosphor-bright);
-  font-size: clamp(21px, 3vw, 29px);
+  font-size: clamp(15px, 2.5vw, 25px);
   font-weight: 700;
   text-shadow: 0 0 9px rgba(123, 255, 151, 0.4);
+  overflow-wrap: anywhere;
 }
 
 .option-description {
@@ -825,7 +827,11 @@ h2 {
 
   .path-option {
     min-height: 145px;
-    padding: 13px;
+    padding: 10px;
+  }
+
+  .option-name {
+    font-size: 15px;
   }
 
   .option-description {
