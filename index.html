@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f4f3ef">
+    <title>Flashcards — Training Terminal</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <main class="terminal-shell">
+      <div class="terminal-screen" aria-label="Flashcard terminal">
+        <div class="screen-content">
+          <header class="screen-header">
+            <span>RED HAT TRAINING / FLASHCARDS</span>
+            <span>VT-100</span>
+          </header>
+
+          <section class="terminal-view home-screen" id="home-screen" aria-labelledby="home-title">
+            <p class="terminal-kicker">WELCOME, LEARNER_</p>
+            <h1 id="home-title">Choose your<br>training path<span class="prompt-mark">_</span></h1>
+            <p class="terminal-copy">Select a course family to begin your session.</p>
+
+            <div class="path-options" role="group" aria-label="Training path">
+              <button class="path-option is-selected" id="path-aap" type="button" aria-pressed="true">
+                <span class="option-code">[ A ]</span>
+                <span class="option-name">AAP</span>
+                <span class="option-description">Ansible Automation Platform</span>
+              </button>
+              <button class="path-option" id="path-openshift" type="button" aria-pressed="false">
+                <span class="option-code">[ O ]</span>
+                <span class="option-name">OpenShift</span>
+                <span class="option-description">Container platform</span>
+              </button>
+            </div>
+            <p class="terminal-hint"><kbd>A</kbd> <kbd>O</kbd> SELECT <span aria-hidden="true">/</span> <kbd>←</kbd> <kbd>→</kbd> MOVE <span aria-hidden="true">/</span> <kbd>ENTER</kbd> CONFIRM</p>
+          </section>
+
+          <section class="terminal-view class-screen" id="class-screen" aria-labelledby="class-title" hidden>
+            <p class="terminal-kicker">OPENSHIFT / COURSE SELECT</p>
+            <h2 id="class-title">Choose a class to start</h2>
+            <div class="ncurses-menu" role="group" aria-label="OpenShift classes">
+              <div class="menu-title"> Available classes </div>
+              <button class="menu-option is-selected" type="button" data-course="DO156-4.18" aria-pressed="true">
+                <span class="menu-pointer" aria-hidden="true">▶</span>
+                <span>DO156-4.18</span>
+                <span class="menu-enter">[ ENTER ]</span>
+              </button>
+              <button class="menu-option" type="button" data-course="DO280-v4.22" data-deck="./openshift/do280-v4.22/flashcards.json" aria-pressed="false">
+                <span class="menu-pointer" aria-hidden="true">▶</span>
+                <span>DO280-v4.22</span>
+                <span class="menu-enter">[ ENTER ]</span>
+              </button>
+              <div class="menu-footer">↑ / ↓ MOVE&nbsp;&nbsp; ENTER SELECT&nbsp;&nbsp; ESC BACK</div>
+            </div>
+            <button class="text-button" id="back-to-paths" type="button">← Back to training paths</button>
+          </section>
+
+          <section class="terminal-view aap-screen" id="aap-screen" aria-labelledby="aap-title" hidden>
+            <p class="terminal-kicker" id="aap-kicker">AAP / DECK STATUS</p>
+            <h2 id="aap-title">No AAP deck loaded.</h2>
+            <p class="terminal-copy" id="aap-message">AAP flashcards can be added when its YAML deck is ready.</p>
+            <button class="text-button" id="aap-back" type="button">← Back to training paths</button>
+          </section>
+
+          <section class="terminal-view study-screen" id="study-screen" aria-labelledby="study-title" hidden>
+            <div class="study-heading">
+              <div>
+                <p class="terminal-kicker">OPENSHIFT / STUDY SESSION</p>
+                <h2 id="study-title" tabindex="-1">DO156-4.18</h2>
+              </div>
+              <button class="text-button" id="exit-study" type="button">[ ESC ] MENU</button>
+            </div>
+            <p class="deck-notice" id="deck-notice"></p>
+            <div class="study-meta">
+              <span id="card-count">Card 1 of 3</span>
+              <span id="known-count">0 known</span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-label="Deck progress" aria-valuemin="0" aria-valuemax="3" aria-valuenow="1">
+              <span class="progress-fill"></span>
+            </div>
+            <section class="flashcard" id="flashcard" tabindex="0" aria-label="Flashcard question">
+              <span class="card-topline">
+                <span id="card-side">QUESTION</span>
+                <span class="flip-hint">↓ TO HINT · SPACE REVEALS FOCUSED HINT</span>
+              </span>
+              <span class="card-content" id="card-content"></span>
+              <div class="card-interaction" id="card-interaction"></div>
+              <div class="card-feedback" id="card-feedback" aria-live="polite" hidden></div>
+              <div class="card-hints" id="card-hints"></div>
+              <span class="card-bottomline" id="card-instructions"></span>
+            </section>
+            <div class="controls" aria-label="Flashcard controls">
+              <button class="button button-secondary" id="previous" type="button" aria-label="Previous card">← <span>Previous</span></button>
+              <button class="button button-known" id="known" type="button" aria-pressed="false">Mark as known</button>
+              <button class="button button-secondary" id="next" type="button" aria-label="Next card"><span>Next</span> →</button>
+            </div>
+            <p class="keyboard-hint"><kbd>←</kbd> <kbd>→</kbd> NAVIGATE CARDS <span aria-hidden="true">/</span> <kbd>TAB</kbd> MOVE BETWEEN CONTROLS</p>
+          </section>
+
+          <p class="sr-only" id="announcer" aria-live="polite" aria-atomic="true"></p>
+        </div>
+      </div>
+
+      <footer class="bezel-footer">
+        <span class="bezel-model">MODEL 1994 <span aria-hidden="true">·</span> SELF-HOSTED</span>
+        <span class="speaker-grille" aria-hidden="true"></span>
+        <button class="power-switch" id="power-switch" type="button" aria-label="Power off terminal" aria-pressed="true">
+          <span class="power-icon" aria-hidden="true"></span>
+        </button>
+      </footer>
+    </main>
+  </body>
+</html>

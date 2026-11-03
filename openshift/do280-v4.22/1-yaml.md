@@ -11,9 +11,7 @@ oc create deployment hello-openshift -o yaml \
 --dry-run=client \
 > ~/my-app/example-deployment.yaml
 
-
 oc create -f https://example.com/example-apps/deployment.yaml
-
 
 
 ### Compare 

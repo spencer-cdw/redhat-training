@@ -54,3 +54,6 @@ oc delete -k base
 ```
 
 lab finish declarative-kustomize
+
+After checking out a new version, use `git show` to inspect the current `HEAD`
+commit and its changes.
