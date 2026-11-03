@@ -3,8 +3,6 @@
 Packaged templates are similar to kustomize, but are openshift specific. 
 
 
-
-
 ## Templates
 
 Default templates are in the `openshift` namespace
@@ -34,7 +32,7 @@ templates can be stored both on disk, or in the cluster
 `oc process foobar -p POSTGRESQL_USER=user1 -o yaml > foobar.yaml`
 `oc process -f foobar.yaml -p POSTGRESQL_USER=user1 -o yaml > foobar2.yaml`
 
-or do oc process and pipe to oc apply
+or do oc process with `--param-file` and pipe to oc apply
 
 ```bash
 cat >> my-postgresql-params.env <<'EOF'

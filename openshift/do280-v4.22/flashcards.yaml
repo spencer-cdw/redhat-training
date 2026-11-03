@@ -1,0 +1,110 @@
+version: 1
+course: DO280-v4.22
+cards:
+  - id: preview-apply-changes
+    type: terminal
+    question: You have an application YAML file and want to see what would change when you apply it. What command do you run?
+    answer: oc diff
+    hints:
+      - You want to see whether something is different.
+      - Try oc --help.
+    source:
+      file: 1-yaml.md
+      heading: Compare
+
+  - id: diff-from-file
+    type: terminal
+    question: You have a file named foobar.yaml and want to see what would change when you apply it. What command could you run?
+    answer: oc diff -f foobar.yaml
+    source:
+      file: 1-yaml.md
+      heading: Compare
+    hints:
+      - Try oc --help
+      - What oc flag might point to a file on disk? 
+
+  - id: apply-three-way-inputs
+    type: multi_select
+    question: oc apply checks three sources to determine how to apply a resource. Select all three.
+    options:
+      - text: The manifest file
+        correct: true
+      - text: The live configuration of the resource in the cluster
+        correct: true
+      - text: The last-applied-configuration annotation
+        correct: true
+      - text: Labels on the resource
+        correct: false
+      - text: A database
+        correct: false
+      - text: /dev/random
+        correct: false
+    explanation: oc apply compares the manifest, live cluster configuration, and the last-applied-configuration annotation.
+    source:
+      file: 1-yaml.md
+      heading: oc apply compares 3 sources
+
+  - id: default-template-namespace
+    type: multi_select
+    question: In which namespace are the default OpenShift templates stored? Select one.
+    options:
+      - text: system
+        correct: false
+      - text: openshift
+        correct: true
+      - text: openshift-system
+        correct: false
+      - text: templates
+        correct: false
+      - text: default
+        correct: false
+    explanation: Default templates are stored in the openshift namespace. You can list them with oc get templates -n openshift.
+    source:
+      file: 2-packaged-apps.md
+      heading: Templates
+
+  - id: view-template-information
+    type: terminal
+    question: Which OpenShift CLI command is used to process a template and view its information?
+    answer: oc process
+    hints:
+      - oc has a command to "render" a template.
+    source:
+      file: 2-packaged-apps.md
+      heading: Templates
+
+  - id: create-app-from-template
+    type: terminal
+    question: What command creates a new application from the built-in postgresql-ephemeral template and sets POSTGRESQL_USER to foobar?
+    answer: oc new-app --template postgresql-ephemeral -p POSTGRESQL_USER=foobar
+    accepted_answers:
+      - oc new-app --template=postgresql-ephemeral -p POSTGRESQL_USER=foobar
+    hints:
+      - Use oc new-app with the --template option.
+    source:
+      file: 2-packaged-apps.md
+      heading: Use Template
+
+  - id: render-template-to-yaml
+    type: terminal
+    question: What command renders the template named foobar with its default parameters and saves the generated YAML to foobar.yaml?
+    answer: oc process foobar -o yaml > foobar.yaml
+    hints:
+      - Omit parameter flags to use the template defaults.
+      - How do you set the output type to yaml?
+      - Pass the template name to oc process before choosing the YAML output format.
+      - -o yaml
+    source:
+      file: 2-packaged-apps.md
+      heading: Deploy from Template
+
+  - id: inspect-checked-out-git-version
+    type: terminal
+    question: In the declarative-kustomize lab, what command displays the commit and changes after you check out a new version?
+    answer: git show
+    hints:
+      - The lab runs this after checking out v1.1.1.
+      - It displays the current HEAD commit.
+    source:
+      file: labs/1-declarative-kustomize.md
+      heading: Deploy v1.1.1
